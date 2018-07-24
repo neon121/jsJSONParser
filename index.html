@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsJSONParser</title>
+    <script type="text/javascript" src="js/jsJSONParser.js"></script>
+    <script type="text/javascript" src="js/jsJSON_de_Parser.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <style>
+        html, body {
+            margin:0;
+            padding:0;
+            width: 100%;
+            height: 100%;
+            font-family: "Calibri", sans-serif;
+        }
+        textarea {
+            padding: 0;
+            margin: 0;
+            outline: 0;
+            font-family: inherit;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+        }
+        textarea#input {
+            width: 300px;
+            left: 0;
+        }
+        textarea#output {
+            left: 301px;
+            width: calc(100% - 303px)
+        }
+        textarea#example {display: none}
+        #buttons {
+            position: absolute;
+            left: 277px;
+            z-index: 9999;
+            top: calc(50% - 61px);
+            width: 50px;
+            opacity: 0.5;
+        }
+        button {font-size: 300%;}
+    </style>
+</head>
+<body>
+<textarea id="input"></textarea>
+<textarea id="example"></textarea>
+<div id="buttons">
+    <button id="do">></button>
+    <button id="undo"><</button>
+</div>
+<textarea id="output"></textarea>
+<script type="text/javascript">
+document.getElementById("do").onclick = function() {
+    document.getElementById('output').value = jsJSONParser(document.getElementById('input').value);
+};
+document.getElementById("undo").onclick = function() {
+    document.getElementById('input').value = jsJSON_de_Parser(document.getElementById('output').value);
+}
+if (location.search != '') {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", 'examples/output.txt');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            document.getElementById('output').value = xhr.responseText;
+            document.getElementById("undo").click();
+        }
+    }
+    xhr.send();
+}
+</script>
+</body>
+</html>
