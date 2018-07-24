@@ -55,4 +55,5 @@ to JSON like
 </pre>
 
 Back operation makes only 1 huge IF condition<br/>
-Not absolutely clean, but without logical errors
+Not absolutely clean, but without logical errors<br/>
+Pure JS
